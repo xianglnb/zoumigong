@@ -16,12 +16,14 @@ char map[100][100]={
 };
 int N=9,M=11;
 int curX=0,curY=0,mg_x=20,mg_y=10,tips_x=10,tips_y=30,intro_x=10,intro_y=45;
-void gotoxy(int x,int y){
+void gotoxy(int x,int y)
+{
 	COORD pos;
 	pos.X=x,pos.Y=y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),pos);
 }
-void setColor(unsigned int color){//
+void setColor(unsigned int color)
+{//
 	/*
 	#define FOREGROUND_BLUE      0x0001 // text color contains blue.
 	#define FOREGROUND_GREEN     0x0002 // text color contains green.
@@ -30,7 +32,8 @@ void setColor(unsigned int color){//
 	*/
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),color);
 }
-void outtips(){
+void outtips()
+{
 	gotoxy(tips_x,tips_y);
 	for(int i=0;i<=60;i++)
 		printf("*");
@@ -44,7 +47,8 @@ void outtips(){
 	for(i=0;i<=60;i++)
 		printf("*");
 }
-void outtips_text(char *s){
+void outtips_text(char *s)
+{
 	gotoxy(tips_x+1,tips_y+1);
 	for(int i=0;i<=58;i++)
 		printf(" ");
@@ -58,10 +62,12 @@ void printPerson()
 	gotoxy(curX+mg_x,curY+mg_y);
 	printf("A");
 }
-void rand_pic(){
+void rand_pic()
+{
 	unsigned int x,y,c;
 	srand(time(NULL));
-	while(1){
+	while(1)
+	{
 		x=rand()%90,y=rand()%40;c=rand()%16;
 		gotoxy(x,y);
 		setColor(c);
@@ -78,7 +84,8 @@ void printMap()
 	}
 }
 
-void myMove(char dir){
+void myMove(char dir)
+{
 	switch(dir)
 	{
 		case 'w':
@@ -118,18 +125,21 @@ void main()
 	printPerson();
 	outtips_text("提示：a--左  d--右  w--上  s--下,按任意键开始游戏并计时！");
 	getch();
-	while(1){
+	while(1)
+	{
 		char ch;
 		gotoxy(curX+mg_x,curY+mg_y);
 		fflush(stdin);
 		ch=getch();
-		if(ch!='a'&&ch!='A'&&ch!='d'&&ch!='D'&&ch!='s'&&ch!='S'&&ch!='w'&&ch!='W'){
+		if(ch!='a'&&ch!='A'&&ch!='d'&&ch!='D'&&ch!='s'&&ch!='S'&&ch!='w'&&ch!='W')
+		{
 			outtips_text("提示：a--左  d--右  w--上  s--下\a\a\a");
 			continue;
 		}
 		myMove(ch);
 		printPerson();
-		if(map[curY][curX]=='E'){
+		if(map[curY][curX]=='E')
+		{
 			e=time(0);
 			char ss[100];
 			sprintf(ss,"通过成功,用时%d秒！",(e-s));
